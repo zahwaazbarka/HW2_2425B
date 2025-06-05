@@ -4,39 +4,47 @@
 class Matrix {
 private:
     int rows;
-    int columns; //the width
+    int columns; // the width
     int* matrix;
 
 public:
-    Matrix(int rows,int columns,int value = 0);
+    // Constructors and Destructor
+    Matrix(int rows, int columns, int value = 0);
     Matrix();
     Matrix(const Matrix& matrix);
+    ~Matrix();
+
+    // Assignment and element access
     Matrix& operator=(const Matrix& matrix);
-    int& operator()( int i, int j);
-    friend std::ostream& operator<<(std::ostream& os,const Matrix& matrix);
+    int& operator()(int i, int j);
 
-    Matrix operator+(const Matrix& matrix);
-    Matrix operator-(const Matrix& matrix);
-    Matrix operator*(const Matrix& matrix);
+    // Output operator
+    friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix);
 
-    Matrix operator+=(const Matrix& matrix);
-    Matrix operator-=(const Matrix& matrix);
-    Matrix operator*=(const Matrix& matrix);
-    Matrix operator-();
+    // Arithmetic operators (Matrix-Matrix)
+    Matrix operator+(const Matrix& matrix) const;
+    Matrix operator-(const Matrix& matrix) const;
+    Matrix operator*(const Matrix& matrix) const;
 
-    friend Matrix operator*(const int n,const Matrix& matrix);
-    friend Matrix operator*(const Matrix& matrix,const int n);
-    friend Matrix operator*=(const Matrix& matrix,const int n);
+    Matrix& operator+=(const Matrix& matrix);
+    Matrix& operator-=(const Matrix& matrix);
+    Matrix& operator*=(const Matrix& matrix);
 
-    bool operator==(const Matrix& matrix);
-    bool operator!=(const Matrix& matrix);
+    Matrix operator-() const;
 
-    Matrix rotateClockwise();
-    Matrix rotateCounterClockwise();
-    Matrix transpose();
+    // Arithmetic operators (Matrix-Scalar)
+    friend Matrix operator*(int n, const Matrix& matrix);
+    friend Matrix operator*(const Matrix& matrix, int n);
+
+    // Logical operators
+    bool operator==(const Matrix& matrix) const;
+    bool operator!=(const Matrix& matrix) const;
+
+    // Transformations
+    Matrix rotateClockwise() const;
+    Matrix rotateCounterClockwise() const;
+    Matrix transpose() const;
+
+    // Norm
     static double CalcFrobeniusNorm(const Matrix& matrix);
-    //static int CalcDeterminant(const Matrix& matrix);
-
-    ~Matrix(){delete [] matrix;}
-
 };
