@@ -35,6 +35,7 @@ public:
     // Arithmetic operators (Matrix-Scalar)
     friend Matrix operator*(int n, const Matrix& matrix);
     friend Matrix operator*(const Matrix& matrix, int n);
+    Matrix& operator*=(int n);  // Add this line
 
     // Logical operators
     bool operator==(const Matrix& matrix) const;
