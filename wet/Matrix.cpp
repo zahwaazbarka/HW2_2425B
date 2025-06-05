@@ -126,6 +126,14 @@ Matrix& Matrix::operator*=(const Matrix& other) {
     return *this;
 }
 
+// Scalar multiplication assignment operator
+Matrix& Matrix::operator*=(int n) {
+    for (int i = 0; i < rows * columns; ++i) {
+        matrix[i] *= n;
+    }
+    return *this;
+}
+
 // Unary minus
 Matrix Matrix::operator-() const {
     Matrix result(rows, columns);
