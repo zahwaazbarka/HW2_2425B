@@ -50,7 +50,7 @@ std::ostream& operator<<(std::ostream&os,const MataMvidia& MataMvidia) {
 
 Matrix& MataMvidia::operator[](int n){
     if(n<0 || n>=frameCount) {
-        exit(14);
+        exitWithError(INDEX_OUT_OF_RANGE);
     }
     return this->frames[n];
 }
