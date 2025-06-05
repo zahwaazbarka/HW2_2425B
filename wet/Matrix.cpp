@@ -26,11 +26,6 @@ Matrix::Matrix(const Matrix& other)
     }
 }
 
-// Destructor
-Matrix::~Matrix() {
-    delete[] matrix;
-}
-
 // Assignment operator
 Matrix& Matrix::operator=(const Matrix& other) {
     if (this == &other) return *this;
