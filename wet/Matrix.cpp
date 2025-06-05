@@ -6,7 +6,7 @@
 
 Matrix::Matrix(const int rows, const int columns,const int value) {
     if (rows < 0 || columns < 0) {
-        exit(7);
+        exitWithError(INVALID_MATRIX_SIZE);
     }
     else {
         matrix=new int[rows*columns];
@@ -50,7 +50,7 @@ Matrix &Matrix::operator=(const Matrix &matrix) {
 }
 int& Matrix::operator()(const int i,const int j) {
     if(i < 0 || i >= rows || j < 0 || j >= columns) {
-        exit(6);
+       exitWithError(INDEX_OUT_OF_RANGE);
     }
     return this->matrix[(this->columns * i)+j];
 }
@@ -67,7 +67,7 @@ std::ostream& operator<<(std::ostream&os,const Matrix& matrix) {
 
 Matrix Matrix::operator+(const Matrix& matrix) {
     if(this->columns != matrix.columns || this->rows != matrix.rows) {
-        exit(4);
+        exitWithError(DIFFERENT_MATRIX_SIZE);
     }
 
     Matrix result(matrix.rows,matrix.columns,0);
@@ -78,7 +78,7 @@ Matrix Matrix::operator+(const Matrix& matrix) {
 }
 Matrix Matrix::operator-(const Matrix& matrix) {
     if(columns != matrix.columns || rows != matrix.rows) {
-        exit(3);
+        exitWithError(DIFFERENT_MATRIX_SIZE);
     }
     Matrix result(matrix.rows,matrix.columns,0);
     for(int i = 0 ;i < rows*columns; i++) {
@@ -88,7 +88,7 @@ Matrix Matrix::operator-(const Matrix& matrix) {
 }
 Matrix Matrix::operator*(const Matrix& matrix) {
     if(columns != matrix.rows) {
-        exit(2);
+        exitWithError(MULTIPLICATION_NOT_DEFINED);
     }
     Matrix result(rows,matrix.columns,0);
     for(int i = 0 ;i < rows; i++) {
